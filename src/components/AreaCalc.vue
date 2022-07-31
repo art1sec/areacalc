@@ -9,6 +9,7 @@
                 v-model="unit"
                 :items="Object.keys(results)"
                 label="Einheit"
+                auto-select-first="true"
                 @change="calculate"
               ></v-combobox>
             </td>
@@ -16,6 +17,7 @@
               <v-text-field
                 label="Anzahl"
                 v-model="sourceValue"
+                type="number"
                 @input="calculate"
               ></v-text-field>
             </td>
@@ -87,8 +89,19 @@ export default {
       this.results.Saarland = this.round(this.squareMeter / 2569690000);
     },
     round(n) {
-      var result = Math.round((n + Number.EPSILON) * 100) / 100;
-      return result.toLocaleString();
+      //var result = Math.round((n + Number.EPSILON) * 100) / 100;
+      //return result.toLocaleString();
+      var result;
+      if (n >= 1) {
+        result = new Intl.NumberFormat("de", {
+          maximumFractionDigits: 2,
+        }).format(n);
+      } else {
+        result = new Intl.NumberFormat("de", {
+          maximumSignificantDigits: 2,
+        }).format(n);
+      }
+      return result;
     },
   },
 };
