@@ -9,7 +9,6 @@
                 v-model="unit"
                 :items="Object.keys(results)"
                 label="Einheit"
-                auto-select-first="true"
                 @change="calculate"
               ></v-combobox>
             </td>
@@ -96,10 +95,12 @@ export default {
         result = new Intl.NumberFormat("de", {
           maximumFractionDigits: 2,
         }).format(n);
-      } else {
+      } else if (n >= 0) {
         result = new Intl.NumberFormat("de", {
           maximumSignificantDigits: 2,
         }).format(n);
+      } else {
+        result = 0;
       }
       return result;
     },
