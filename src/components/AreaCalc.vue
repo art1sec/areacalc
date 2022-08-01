@@ -4,15 +4,15 @@
       <template v-slot:default>
         <tbody>
           <tr>
-            <td class="text-left">
-              <v-combobox
+            <td class="text-left" width="200">
+              <v-select
                 v-model="unit"
                 :items="Object.keys(results)"
                 label="Einheit"
                 @change="calculate"
-              ></v-combobox>
+              ></v-select>
             </td>
-            <td class="text-left">
+            <td class="text-left" width="200">
               <v-text-field
                 label="Anzahl"
                 v-model="sourceValue"
